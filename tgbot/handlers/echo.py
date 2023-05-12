@@ -2,6 +2,8 @@ from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.utils.markdown import hcode
 
+from tgbot.keyboards import inline, reply
+
 
 async def bot_echo(message: types.Message):
     text = [
@@ -10,7 +12,7 @@ async def bot_echo(message: types.Message):
         message.text
     ]
 
-    await message.answer('\n'.join(text))
+    await message.answer('\n'.join(text), reply_markup=reply.hello_kb)
 
 
 async def bot_echo_all(message: types.Message, state: FSMContext):
@@ -20,7 +22,7 @@ async def bot_echo_all(message: types.Message, state: FSMContext):
         'Содержание сообщения:',
         hcode(message.text)
     ]
-    await message.answer('\n'.join(text))
+    await message.answer('\n'.join(text), reply_markup=reply.hello_kb)
 
 
 def register_echo(dp: Dispatcher):
